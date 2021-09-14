@@ -1,0 +1,10 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <Target Name="Build">
+    <MSBuild
+			Projects="Dpr.AutomationFramework.sln"
+			Targets="Build"
+			Properties="Configuration=Release">
+			<Output TaskParameter="TargetOutputs" ItemName="SolutionBuild" />
+		</MSBuild>
+	</Target>
+</Project>

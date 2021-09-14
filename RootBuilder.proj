@@ -1,0 +1,52 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build"> 
+  
+  <!--
+    This task performs all of the work that would have previously been performed by the build v3 server
+  -->
+  <UsingTask
+    AssemblyFile="c:\dprbuild\Tasks\CLR4\Dpr.BuildTasks.CLR4.dll"
+    TaskName="Dpr.BuildTasks.CLR4.BuildV3AdapterTask" />
+
+  <PropertyGroup>
+    <Build_Repository_Uri Condition="'$(Build_Repository_Uri)' == ''">http://localhost/</Build_Repository_Uri>
+    <SYSTEM_TEAMPROJECT Condition="'$(SYSTEM_TEAMPROJECT)' == ''">LocalDevBuild</SYSTEM_TEAMPROJECT>
+    <SYSTEM_TEAMFOUNDATIONSERVERURI Condition="'$(SYSTEM_TEAMFOUNDATIONSERVERURI)' == ''">http://localhost/</SYSTEM_TEAMFOUNDATIONSERVERURI>
+    <GITVERSION_FULLSEMVER Condition="'$(GITVERSION_FULLSEMVER)' == ''">0.0.0</GITVERSION_FULLSEMVER>
+    <GITVERSION_MAJOR Condition="'$(GITVERSION_MAJOR)' == ''">0</GITVERSION_MAJOR>
+    <GITVERSION_MINOR Condition="'$(GITVERSION_MINOR)' == ''">0</GITVERSION_MINOR>
+    <GITVERSION_PATCH Condition="'$(GITVERSION_PATCH)' == ''">0</GITVERSION_PATCH>
+    <BUILD_REPOSITORY_URI Condition="'$(BUILD_REPOSITORY_URI)' == ''">http://localhost/</BUILD_REPOSITORY_URI>
+    <BUILD_REPOSITORY_NAME Condition="'$(BUILD_REPOSITORY_NAME)' == ''">DeveloperBuild</BUILD_REPOSITORY_NAME>
+    <BUILD_SOURCEBRANCH Condition="'$(BUILD_SOURCEBRANCH)' == ''">DeveloperBuild</BUILD_SOURCEBRANCH>
+    <BUILD_SOURCEVERSION Condition="'$(BUILD_SOURCEVERSION)' == ''">0</BUILD_SOURCEVERSION>
+    <IsLocalBuild Condition="'$(IsLocalBuild)' == ''">True</IsLocalBuild>
+  </PropertyGroup>
+
+  <Target Name="Build">
+    <MSBuild Projects="Cleanse.proj" />
+
+    <Message Text="VersionStamp: $(GITVERSION_MAJOR).$(GITVERSION_MINOR).$(GITVERSION_PATCH)" />
+    <Message Text="DevOps:       $(BUILD_REPOSITORY_URI)" />
+    <Message Text="Repository:   $(BUILD_REPOSITORY_NAME)" />
+    <Message Text="Branch:       $(BUILD_SOURCEBRANCH)" />
+    <Message Text="Commit:       $(BUILD_SOURCEVERSION)" />
+
+    <!--
+      This will build the projects listed in the project.yml file.  The variables are set by the GitVersion tool or by the azure pipeline when running
+      this in a devops pipline or by the LocalBuild.cmd file when building locally.
+    -->
+    <Dpr.BuildTasks.CLR4.BuildV3AdapterTask
+      WorkingDirectory="$(MSBuildProjectDirectory)"
+      RestoredArtefacts="packages"
+      ProjectDefns="projects.yml"
+      ProducedArtefacts="packages"
+      VersionStamp="$(GITVERSION_MAJOR).$(GITVERSION_MINOR).$(GITVERSION_PATCH)"
+      DevOps="$(SYSTEM_TEAMFOUNDATIONSERVERURI)$(SYSTEM_TEAMPROJECT)"
+      Repository="$(Build_Repository_Uri)"
+      Branch="$(BUILD_SOURCEBRANCH)"
+      Commit="$(BUILD_SOURCEVERSION)"
+      BuildTime="$([System.DateTime]::Now.ToString(dd/MM/yyyy HH:mm))">
+    </Dpr.BuildTasks.CLR4.BuildV3AdapterTask>
+  </Target>
+
+</Project>

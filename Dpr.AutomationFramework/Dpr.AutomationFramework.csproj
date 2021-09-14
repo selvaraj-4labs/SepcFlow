@@ -1,0 +1,986 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.224\build\SpecFlow.Tools.MsBuild.Generation.props" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.224\build\SpecFlow.Tools.MsBuild.Generation.props')" />
+  <Import Project="..\packages\SpecFlow.MsTest.3.0.224\build\SpecFlow.MsTest.props" Condition="Exists('..\packages\SpecFlow.MsTest.3.0.224\build\SpecFlow.MsTest.props')" />
+  <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4E634D7D-974A-4F9D-A030-B3E0E8F63B32}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dpr.AutomationFramework</RootNamespace>
+    <AssemblyName>Dpr.AutomationFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="appium-dotnet-driver, Version=3.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appium.WebDriver.3.0.0.2\lib\net45\appium-dotnet-driver.dll</HintPath>
+    </Reference>
+    <Reference Include="BoDi, Version=1.4.1.0, Culture=neutral, PublicKeyToken=ff7cd5ea2744b496, processorArchitecture=MSIL">
+      <HintPath>..\packages\BoDi.1.4.1\lib\net45\BoDi.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
+    </Reference>
+    <Reference Include="ExtentReports, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExtentReports.4.0.3\lib\ExtentReports.dll</HintPath>
+    </Reference>
+    <Reference Include="Gherkin, Version=6.0.0.0, Culture=neutral, PublicKeyToken=86496cfa5b4a5851, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gherkin.6.0.0\lib\net45\Gherkin.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit, Version=2.3.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.2.3.2\lib\net45\MailKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MSTest.TestFramework.1.4.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeKit, Version=2.3.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.2.3.2\lib\net45\MimeKit.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.7.2\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.7.2\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.7.2\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="TechTalk.SpecFlow, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.3.0.224\lib\net45\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
+    <Reference Include="TechTalk.SpecFlow.MSTest.SpecFlowPlugin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <HintPath>..\packages\SpecFlow.MsTest.3.0.224\lib\net45\TechTalk.SpecFlow.MSTest.SpecFlowPlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Utf8Json, Version=1.3.7.0, Culture=neutral, PublicKeyToken=8a73d3ba7e392e27, processorArchitecture=MSIL">
+      <HintPath>..\packages\Utf8Json.1.3.7\lib\net45\Utf8Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver, Version=3.11.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.11.2\lib\net45\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=3.11.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.11.2\lib\net45\WebDriver.Support.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP01.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP02.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP03.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP04.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP06.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP06_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP06_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP06_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP07.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP07_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP07_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP07_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP08.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP08_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP08_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP08_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndEmployed_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndEmployed_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndEmployed_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndFTC.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndFTC_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndFTC_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndFTC_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndSelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndSelfEmployed_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndSelfEmployed_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_2ndSelfEmployed_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_Employed_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_Employed_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_Employed_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_FTC.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_FTC_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_FTC_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_FTC_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_SelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_SelfEmployed_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_SelfEmployed_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_SelfEmployed_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP09_Employed.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP10.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP10_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP10_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP10_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP11.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP11_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP11_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP11_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP12.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP12_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP12_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP13.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP14.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP15.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP17.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_ADV_DIP12_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\ADV_DIP\CBS_BranchSummary.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\CBS_BranchCustomerSearch.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\CBS_BranchHomePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BranchPortal\CBS_PrivacyNotice.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\CBS_BrokerHomePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\CBS_LoginPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\CBS_MemorableWordPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP01.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP02.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP03.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP04.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP05.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP06.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP06_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP06_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP06_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP07.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP07_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP07_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP07_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP08.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP08_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP08_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP08_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndEmployed_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndEmployed_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndEmployed_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndFTC_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndFTC_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndFTC_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndSelfEmployed_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndSelfEmployed_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndSelfEmployed_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_Employed.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_Employed_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_Employed_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_Employed_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_FTC.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndFTC.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_FTC_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_FTC_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_FTC_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_SelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_2ndSelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_SelfEmployed_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_SelfEmployed_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP09_SelfEmployed_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP10.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP10_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP10_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP10_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP11.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP11_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP11_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP11_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP12.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP12_2.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP12_3.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP12_4.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP13.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP14.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIP15.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_DIPAPPSUM.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_PBD01.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_PBD02.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\DIP\CBS_PBD04.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\ILL\CBS_ILL01.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\ILL\CBS_ILL02.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\ILL\CBS_ILL03.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\ILL\CBS_ILL04.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\ILL\CBS_ILL05.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\CBS\BrokerPortal\ILL\CBS_ILL06.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_AP01.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_CreditStubEbanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_DecisionPageEbanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_EAP01Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_EAP02Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_EAP04JointApplicantEbanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_EAP09Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_EAP15Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_EAP19Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_EAP25Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ApplyOnline\HEBS_EbankingApplyOnline.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_AccountTypePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_CancelAutorisedPaymentsConfirmationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_ChangeYourMobileNumberPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_ConfirmPaymentDetails.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_EBankingAccountsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_EBankingLoginPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_EnterPaymentDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_ForgottenMemorableAnswerPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_ChangeYourPasswordPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_ForgottenPasswordPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_ForgottenUserIdPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_LoginDetailsConfirmationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_MemorableAnswerPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_MessageCentrePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_NewMailConfirmationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_NewMailPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_NewUserIDPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_PaymentConfirmationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_YourContactDetails.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_YourDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\HEBS_YourDocumentsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\TransferMoney\HEBS_ConfirmTransferDetails.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\TransferMoney\HEBS_EnterTransferDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\TransferMoney\HEBS_TransferConfirmation.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\eBankingPortal\ViewAccounts\HEBS_AccountDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_DecisionPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP07FourthShareholder.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_CreditStub.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP00.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP01.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP02.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP03.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP04.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP04JointApplicant.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP05.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP05FourthSig.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP05SecondSig.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP05ThirdSig.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP06.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP07.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP07SecondShareholder.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP07ThirdShareholder.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP08.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP09.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP12.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP14.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP15.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP17.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP19.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP25.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_EAP27.cs" />
+    <Compile Include="Dpr.AutomationFramework.ClientPageRepository\HEBS\SavingsPortal\HEBS_SaveAndRestore.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\CBS\AvailableApplicants\CBS_ApplicantTypeList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\CBS\AvailableApplicants\CBS_ApplicantTypeRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\CBS\AvailableJourneys\AvailbleJourneyRepositories\BranchPortal\CBS_BranchMortgageOriginationsJourneyList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\CBS\AvailableJourneys\AvailbleJourneyRepositories\BranchPortal\CBS_BranchMortgageOriginationsJourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\CBS\AvailableJourneys\AvailbleJourneyRepositories\BrokerPortal\CBS_BrokerMortgageOriginationsJourneyList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\CBS\AvailableJourneys\AvailbleJourneyRepositories\BrokerPortal\CBS_BrokerMortgageOriginationsJourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\CBS\CBS_MortgageProductTypes\CBS_BuyToLetList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\CBS\CBS_MortgageProductTypes\CBS_ResidentialList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\CBS\DSL\CBS_DSLHelper.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableApplicants\HEBS_ApplicantTypeList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableApplicants\HEBS_ApplicantTypeRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableJourneys\AvailableJourneyRepositories\eBankingPortal\HEBS_EBankingJourneyList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableJourneys\AvailableJourneyRepositories\eBankingPortal\HEBS_EBankingJourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableJourneys\AvailableJourneyRepositories\SavingsPortal\HEBS_SavingsJourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableJourneys\SavingsProductTypes\HEBS_ChildISAProductList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableJourneys\SavingsProductTypes\HEBS_ChildProductList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableJourneys\SavingsProductTypes\HEBS_ISAProductList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\DSL\HEBS_DSLHelper.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableJourneys\SavingsProductTypes\HEBS_CorporateProductList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Clients\HEBS\AvailableJourneys\SavingsProductTypes\HEBS_RetailProductList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\AppAutomationQueue.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\ApplicationAutomationQueueManager.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\ButtonGroup.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\ImplicitTimerTracker.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\MailtrapRetriever.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\Messages.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\ScreenCapture.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\WholeScenarioData.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\CoreDSL\CoreDSLHelpers.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\Report\ReportGenerator.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\TestEndClasses\TestEnder.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\Base\AppBasePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\Base\BasePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\Base\BOWizardBasePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.AvailableJourneys\IntermediaryPortal\BrokerMortgageOriginationsJourneyList.cs" />
+    <Compile Include="Dpr.AutomationFramework.AvailableJourneys\IntermediaryPortal\BrokerMortgageOriginationsJourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Intermediary\MortgageProductsTypes\BuyToLetList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Intermediary\MortgageProductsTypes\ResidentialList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Intermediary\DSL\DSLHelper.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendExpenditureWizard\AmendExpenditureP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendExpenditureWizard\AmendExpenditureP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendExpenditureWizard\AmendExpenditureP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendExpenditureWizard\AmendExpenditureP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendFactFindWizard\AmendFactFindP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendFactFindWizard\AmendFactFindP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendReadOnlyCaseAccessWizard\AmendReadOnlyCaseAccessP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendSecurityWizard\AmendSecurityP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendSecurityWizard\AmendSecurityP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendSecurityWizard\AmendSecurityP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendSecurityWizard\AmendSecurityP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendSecurityWizard\AmendSecurityP5.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\DecisionIntegrityWizard\DecisionIntegrityP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\ExtendOfferWizard\ExtendOfferP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\ExtendOfferWizard\ExtendOfferP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\ExtendOfferWizard\ExtendOfferP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\InstructValuationWizard\InstructValuationP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\InstructValuationWizard\InstructValuationP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\InstructValuationWizard\InstructValuationP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\IssueOfferWizard\IssueOfferP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\IssueOfferWizard\IssueOfferP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\IssueOfferWizard\IssueOfferP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\ProcessCOTWizard\ProcessCOTP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\ProcessCOTWizard\ProcessCOTP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\ProcessCOTWizard\ProcessCOTP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\RunBusinessRulesWizard\RunBusinessRulesP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\RunBusinessRulesWizard\RunBusinessRulesP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\RunBusinessRulesWizard\RunBusinessRulesP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\SetAmendRetentionAmountWizard\SetAmendRetentionAmountP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\SetAmendRetentionAmountWizard\SetAmendRetentionAmountP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\SetAmendRetentionAmountWizard\SetAmendRetentionAmountP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\ValuationReceiptWizard\ValuationReceiptP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\ValuationReceiptWizard\ValuationReceiptP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\BCOB01.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1SecondaryEmploymentPageEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1SecondaryEmploymentPageFixedTermContract.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1SecondaryEmploymentPageSelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2AddressHistoryPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2BTLPortfolioPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2CreditCommitmentsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2DetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2EmploymentInitialisationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1AddressHistoryPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1BTLPortfolioPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1CreditCommitmentsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1EmploymentInitialisationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1DetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2SecondaryEmploymentPageEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2SecondaryEmploymentPageFixedTermContract.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2SecondaryEmploymentPageSelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\ApplicationSummaryPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\FeesAndFeaturesPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\PropertyDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant1PrimaryEmploymentPageFixedTermContract.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\DIP_ApplicationSummaryPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_AccessDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant1DetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant1PrimaryEmploymentPageEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant1PrimaryEmploymentPageSelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant2DetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant2PrimaryEmploymentDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant2PrimaryEmploymentPageEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant2PrimaryEmploymentPageFixedTermContract.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant2PrimaryEmploymentPageSelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_ApplicationSummaryPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_CreditStub.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_DecisionResultPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_DeclarationsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_DirectDebitDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_FeesAndFeaturesPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_LoanDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_PaymentDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_Applicant1PrimaryEmploymentDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_ProductSelectionPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_ProductValidityPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_PropertyDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\FMA\FMA_SolicitorDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\InstructValuation\IV_ApplicationSummaryPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\InstructValuation\ValuationInstructionPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\MemorableWordPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2EmploymentSummaryPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\DPACreditSearchPermissionPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\ProductSelectionPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\LoginPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1EmploymentSummaryPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1PrimaryEmploymentPageEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1PrimaryEmploymentPageFixedTermContract.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant1PrimaryEmploymentPageSelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2PrimaryEmploymentPageEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2PrimaryEmploymentPageFixedTermContract.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\Applicant2PrimaryEmploymentPageSelfEmployed.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\ApplicantAndLoanTypePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\LoanDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\PreReqQuestionsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\BrokerHomePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\DecisionPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\HouseholdExpenditurePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\CompanyDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\IntermediaryPortal\DIP\SubmissionRoutePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendApplicantsWizard\AmendApplicantsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendApplicantsWizard\AmendApplicantsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendApplicantsWizard\AmendApplicantsP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendApplicantsWizard\AmendApplicantsP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP08.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\RibbonBar\NotesMenu.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\RibbonBar\TasksMenu.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Tabs\CurrentWorkspaceTab.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Tabs\NotesTab.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Tabs\SummaryTab.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\CancelAccountReview\CancelAccountReviewClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\UpdatAccountReview\UpdateAccountReviewP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\UpdatAccountReview\UpdateAccountReviewClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\UpdatAccountReview\UpdateAccountReviewP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountNew\BankAccountNewClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountNew\BankAccountNewOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountUncease\BankAccountUnceaseClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountUncease\BankAccountUnceaseOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\ChangeBranchOwnership\ChangeBranchOwnershipClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\ChangeBranchOwnership\ChangeBranchOwnershipOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\ChangeBranchOwnership\ChangeBranchOwnershipP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\ChangeBranchOwnership\ChangeBranchOwnershipP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\CancelCustomerDeceased\CancelCustomerDeceasedClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\CancelCustomerDeceased\CancelCustomerDeceasedP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\CancelCustomerDeceased\CancelCustomerDeceasedP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\ContactCustomer\ContactCustomerClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\ContactCustomer\ContactCustomerOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\CustomerDeduplication\CustomerDeduplicationClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\CustomerDeduplication\CustomerDeduplicationOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerRegisteredCard\UpdateCustomerRegisteredCardClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerRegisteredCard\UpdateCustomerRegisteredCardOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerRegisteredCard\UpdateCustomerRegisteredCardP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdatePersonalDetails\UpdatePersonalDetailsClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdatePersonalDetails\UpdatePersonalDetailsOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\DocumentHistory\DocumentHistoryClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\DocumentHistory\DocumentHistoryP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\SendToThirdParty\SendToThirdPartyClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\SendToThirdParty\SendToThirdPartyP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\UploadDocument\UploadDocumentP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\UploadDocument\UploadDocumentClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\UploadDocument\UploadDocumentOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\UploadDocument\UploadDocumentP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\UploadDocument\UploadDocumentP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ISATransfer\ISATransferOut\ISATransferOutP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CancelCustomerInLongTermCare\CancelCustomerInLongTermCareClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\ConfirmCustomerInLongTermCare\ConfirmCustomerInLongTermCareClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CustomerInLongTermCareNotification\CustomerInLongTermCareNotificationClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CustomerInLongTermCareNotification\CustomerInLongTermCareNotificationOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CustomerInLongTermCareNotification\CustomerInLongTermCareNotificationP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CustomerInLongTermCareNotification\CustomerInLongTermCareNotificationP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CustomerInLongTermCareNotification\CustomerInLongTermCareNotificationP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CustomerInLongTermCareNotification\CustomerInLongTermCareNotificationP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CustomerInLongTermCareNotification\CustomerInLongTermCareNotificationP5.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CustomerInLongTermCareNotification\CustomerInLongTermCareNotificationP6.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CustomerInLongTermCareNotification\CustomerInLongTermCareNotificationP7.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\UpdateConfirmCustomerInLongTermCare\UpdateConfirmCustomerInLongTermCareClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\CloseNote\CloseNoteClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\CloseNote\CloseNoteP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\CloseNote\CloseNoteP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\NewNote\NewNoteClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\NewNote\NewNoteOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\NewNote\NewNoteP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\NewNote\NewNoteP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\RespondToNote\RespondToNoteClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\AddNewTask\AddNewTaskClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\AddNewTask\AddNewTaskOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\AddNewTask\AddNewTaskP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\AddNewTask\AddNewTaskP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\CancelTask\CancelTaskClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\CancelTask\CancelTaskP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\CancelTask\CancelTaskP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\CompleteTask\CompleteTaskClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\CompleteTask\CompleteTaskP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\CompleteTask\CompleteTaskP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\PendTask\PendTaskClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\PendTask\PendTaskP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Tasks\PendTask\PendTaskP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\CancelOverrideCustomerTaxStatus\CancelOverrideCustomerTaxStatusClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\CancelOverrideCustomerTaxStatus\CancelOverrideCustomerTaxStatusP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\CancelOverrideCustomerTaxStatus\CancelOverrideCustomerTaxStatusP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\CancelTaxResidencyStatus\CancelTaxStatusUpdateRequestP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\CancelTaxResidencyStatus\CancelTaxStatusUpdateRequestP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\CancelTaxResidencyStatus\CancelTaxStatusUpdateRequestClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\OverrideCustomerTaxStatus\OverrideCustomerTaxStatusClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\OverrideCustomerTaxStatus\OverrideCustomerTaxStatusOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateOverrideCustomerTaxStatus\UpdateOverrideCustomerTaxStatusClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateTaxStatusUpdateRequest\UpdateTaxStatusUpdateRequestClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\Base\WebBasePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\PageCondition.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\DefaultData\Data.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\Definitions\Defs.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\PersistentData\PersistentData.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\AdHocWithdrawal\AdHocWithdrawalP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\CreateWithdrawal\CreateWithdrawalP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\InternalTransfer\InternalTransferP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\ApplicantAddressPagePBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\ApplicantCommitmentsPagePBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\ApplicantDetailsPagePBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\ApplicantEmploymentPage2PBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\ApplicantEmploymentPagePBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\ApplicantLoanTypePagePBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\BrokerHomePagePBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\LoanDetailsPagePBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\LoginDetails.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\LoginPagePBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\PrerequisiteQuestions.cs" />
+    <Compile Include="Dpr.AutomationFramework.PBR\Intermediary\PortalPages\SubmissionRoutePagePBR.cs" />
+    <Compile Include="Dpr.AutomationFramework.Savings\AvailableApplicants\ApplicantTypeList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Savings\AvailableApplicants\ApplicantTypeRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\LocatorList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\Section.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\WaitFor.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\AppJourney.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\WebJourney.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\ImplicitTimer.cs" />
+    <Compile Include="Dpr.AutomationFramework.AvailableJourneys\BackOfficeApplication\BOJourneyList.cs" />
+    <Compile Include="Dpr.AutomationFramework.AvailableJourneys\eBankingPortal\EBankingJourneyList.cs" />
+    <Compile Include="Dpr.AutomationFramework.AvailableJourneys\ServicingApplication\ServicingJourneyList.cs" />
+    <Compile Include="Dpr.AutomationFramework.AvailableJourneys\eBankingPortal\EBankingJourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.AvailableJourneys\ServicingApplication\ServicingJourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\AvailableJourneys\JourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.Savings\SavingsProductTypes\ChildIsaList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Savings\SavingsProductTypes\ChildProductList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Savings\SavingsProductTypes\CorporateProductList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Savings\SavingsProductTypes\ISAProductList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Savings\SavingsProductTypes\RetailProductList.cs" />
+    <Compile Include="Dpr.AutomationFramework.Savings\DSL\DSLHelper.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\CaseSearch\CaseSearchTab.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\RadioButton.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\Journey.cs" />
+    <Compile Include="Dpr.AutomationFramework.Core\ClassDefinitions\Element.cs" />
+    <Compile Include="Dpr.AutomationFramework.AvailableJourneys\SavingsPortal\SavingsJourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.AvailableJourneys\BackOfficeApplication\BOJourneyRepository.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\CaseSummaryTabs\CaseSummaryTab.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\CaseSummaryTabs\ChecklistTab.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\CaseSummaryTabs\BackOfficeRibbonBar.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendAccountSettingsWizard\AmendAccountSettingsP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendAccountSettingsWizard\AmendAccountSettingsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendAccountSettingsWizard\AmendAccountSettingsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendNominatedAccountDetailsWizard\AmendNominatedAccountDetailsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendNominatedAccountDetailsWizard\AmendNominatedAccountDetailsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AmendNominatedAccountDetailsWizard\AmendNominatedAccountDetailsP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AnonymiseApplicantWizard\AnonymiseApplicantP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AnonymiseApplicantWizard\AnonymiseApplicantP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\AnonymiseApplicantWizard\AnonymiseApplicantP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\CompleteCaseWizard\CompleteCaseP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\CompleteCaseWizard\CompleteCaseP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\CompleteCaseWizard\CompleteCaseP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\CompleteCaseWizard\CompleteCaseP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\DeclineCancelApplicationWizard\DeclineCancelApplicationP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\DeclineCancelApplicationWizard\DeclineCancelApplicationP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\GenerateDataOutputDocumentWizard\GenerateDataOutputDocumentP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\GenerateDataOutputDocumentWizard\GenerateDataOutputDocumentP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\GenerateDataOutputDocumentWizard\GenerateDataOutputDocumentP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\UpdateApplicantConsentsWizard\UpdateApplicantConsentsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\UpdateApplicantConsentsWizard\OLDUpdateApplicantConsentsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\UpdateApplicantConsentsWizard\UpdateApplicantConsentsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\UpdateApplicantConsentsWizard\UpdateApplicantConsentsP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\BackOfficeApplication\Wizards\UpdateApplicantConsentsWizard\UpdateApplicantConsentsP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\CreditStubEbanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\DecisionPageEbanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\EAP01Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\EAP02Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\EAP04JointApplicantEbanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\EAP09Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\EAP15Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\EAP19Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\EAP25Ebanking.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\EbankingApplyOnline.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ApplyOnline\AP01.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\EBankingAccountsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ChangeYourMobileNumberPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ForgottenPasswordPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\CancelAutorisedPaymentsConfirmationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\NewMailConfirmationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\MessageCentrePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\NewMailPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ForgottenUserIdPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ForgottenMemorableAnswerPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\AccountTypePage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\YourContactDetails.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ChangeYourPasswordPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\YourDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\YourDocumentsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\TransferMoney\TransferConfirmation.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\TransferMoney\EnterTransferDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\TransferMoney\ConfirmTransferDetails.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ViewAccounts\AccountDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP14.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP04JointApplicant.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP07.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\RibbonBar\AccountManagerRibbon.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\RibbonBar\DocumentsMenu.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\RibbonBar\ProcessActions.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\RibbonBar\Workspace.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\RibbonBar\Ribbon.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\RibbonBar\NewProcess.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountMaintenance\AccountMaintenanceClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountMaintenance\AccountMaintenanceOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountMaintenance\AccountMaintenanceP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountMaintenance\AccountMaintenanceP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountReview\AccountReviewClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountReview\AccountReviewOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountReview\AccountReviewP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountReview\AccountReviewP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountReview\AccountReviewP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountSettings\AccountSettingsOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountSettings\AccountSettingsP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountSettings\AccountSettingsP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountSettings\AccountSettingsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountSettings\AccountSettingsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountSettings\AccountSettingsP5.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\AccountSettings\AccountSettingsClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\CancelAccountReview\CancelAccountReviewP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\CancelAccountReview\CancelAccountReviewP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\GenerateStatement\GenerateStatementP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\ModifyAccountTags\ModifyAccountTagsClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\ModifyAccountTags\ModifyAccountTagsOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\ModifyAccountTags\ModifyAccountTagsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\ModifyAccountTags\ModifyAccountTagsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\SetLoanAccountStatusDate\SetLoanAccountStatusDateClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\SetLoanAccountStatusDate\SetLoanAccountStatusDateOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\SetLoanAccountStatusDate\SetLoanAccountStatusDateP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Account\SetLoanAccountStatusDate\SetLoanAccountStatusDateP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountCease\BankAccountCeaseClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountCease\BankAccountCeaseOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountCease\BankAccountCeaseP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountCease\BankAccountCeaseP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountNew\BankAccountNewP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountNew\BankAccountNewP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountUncease\BankAccountUnceaseP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountUncease\BankAccountUnceaseP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountUpdate\BankAccountUpdateClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountUpdate\BankAccountUpdateOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountUpdate\BankAccountUpdateP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\BankAccountUpdate\BankAccountUpdateP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\SetNominatedBankAccountDetails\SetNominatedBankAccountDetailsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\BankAccount\SetNominatedBankAccountDetails\SetNominatedBankAccountDetailsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Bonus\ManageBonus\ManageBonusClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Bonus\ManageBonus\ManageBonusP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Bonus\ManageBonus\ManageBonusOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Bonus\ManageBonus\ManageBonusP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\CancelCustomerComplaint\CancelCustomerComplaintP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\CancelCustomerComplaint\CancelCustomerComplaintP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\CancelCustomerComplaint\CancelCustomerComplaintClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\LogComplaint\LogComplaintClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\LogComplaint\LogComplaintOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\LogComplaint\LogComplaintP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\LogComplaint\LogComplaintP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\LogComplaint\LogComplaintP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\UpdateCustomerComplaint\UpdateCustomerComplaintClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\UpdateCustomerComplaint\UpdateCustomerComplaintP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Complaints\UpdateCustomerComplaint\UpdateCustomerComplaintP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\ConfirmCustomerDeceased\ConfirmCustomerDeceasedP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\ConfirmCustomerDeceased\ConfirmCustomerDeceasedP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\ConfirmCustomerDeceased\ConfirmCustomerDeceasedP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\CustomerDeceasedNotification\CustomerDeceasedNotificationClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\CustomerDeceasedNotification\CustomerDeceasedNotificationOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\CustomerDeceasedNotification\CustomerDeceasedNotificationP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\CustomerDeceasedNotification\CustomerDeceasedNotificationP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\UpdateConfirmCustomerDeceased\UpdateConfirmCustomerDeceasedP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\UpdateConfirmCustomerDeceased\UpdateConfirmCustomerDeceasedP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerStatus\CancelCustomerStatus\CancelCustomerStatusP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerStatus\CancelCustomerStatus\CancelCustomerStatusP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerStatus\ResumeCustomerStatus\ResumeCustomerStatusP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerStatus\ResumeCustomerStatus\ResumeCustomerStatusP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerStatus\SetConfirmCustomerStatus\SetConfirmCustomerStatusClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerStatus\SetConfirmCustomerStatus\SetConfirmCustomerStatusOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerStatus\SetConfirmCustomerStatus\SetConfirmCustomerStatusP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerStatus\SetConfirmCustomerStatus\SetConfirmCustomerStatusP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerStatus\SetConfirmCustomerStatus\SetConfirmCustomerStatusP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\AddCustomer\AddCustomerClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\AddCustomer\AddCustomerOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\AddCustomer\AddCustomerP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\AddCustomer\AddCustomerP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\AddCustomer\AddCustomerP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\AddCustomer\AddCustomerP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\AddCustomer\AddCustomerP5.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\ContactCustomer\ContactCustomerP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\ContactCustomer\ContactCustomerP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\CustomerDeduplication\CustomerDeduplicationP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\CustomerDeduplication\CustomerDeduplicationP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsP5.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsP6.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsP7.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsP8.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsP9.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\MaintainEmploymentDetails\MaintainEmploymentDetailsOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\ManageEBankingCredentials\ManageEBankingCredentialsClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\ManageEBankingCredentials\ManageEBankingCredentialsOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\ManageEBankingCredentials\ManageEBankingCredentialsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\ManageEBankingCredentials\ManageEBankingCredentialsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\ManagePayees\ManagePayeesP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerRegisteredCard\UpdateCustomerRegisteredCardP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerRegisteredCard\UpdateCustomerRegisteredCardP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdatePersonalDetails\UpdatePersonalDetailsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdatePersonalDetails\UpdatePersonalDetailsP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdatePersonalDetails\UpdatePersonalDetailsP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AddRegularDeposit\AddRegularDepositP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AddRegularDeposit\AddRegularDepositP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AddRegularDeposit\AddRegularDepositClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AddRegularDeposit\AddRegularDepositOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AdHocDeposit\AdHocDepositClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AdHocDeposit\AdHocDepositOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AdHocDeposit\AdHocDepositP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AdHocDeposit\AdHocDepositP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AdHocDeposit\AdHocDepositP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\CancelRegularDeposit\CancelRegularDepositClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\CancelRegularDeposit\CancelRegularDepositOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\CancelRegularDeposit\CancelRegularDepositP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\CancelRegularDeposit\CancelRegularDepositP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\DepositReversal\DepositReversalOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\DepositReversal\DepositReversalClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\DepositReversal\DepositReversalP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\DepositReversal\DepositReversalP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\DepositReversal\DepositReversalP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\AddNewDocument\AddNewDocumentClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\AddNewDocument\AddNewDocumentOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\AddNewDocument\AddNewDocumentP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\AddNewDocument\AddNewDocumentP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\ManageDocument\ManageDocumentClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\ManageDocument\ManageDocumentP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\ManageDocument\ManageDocumentP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\PreviewDocument\PreviewP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\PreviewDocument\PreviewClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\Versions\VersionsClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Documents\Versions\VersionsP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\AddNewFee\AddNewFeeOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\AddNewFee\AddNewFeeP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\AddNewFee\AddNewFeeP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\AddNewFee\AddNewFeeP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\AddNewFee\AddNewFeeP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\AddNewFee\AddNewFeeClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\UpdateReverseFee\UpdateReverseFeeClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\UpdateReverseFee\UpdateReverseFeeOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\UpdateReverseFee\UpdateReverseFeeP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\UpdateReverseFee\UpdateReverseFeeP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Fees\UpdateReverseFee\UpdateReverseFeeP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\GenericPages\ExitWorkspaceVerification.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\GenericPages\GenericFinalWizardPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\GenericPages\GenericWizardOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\GenericPages\GenericWizardClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ISATransfer\ISATransferIn\ISATransferInClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ISATransfer\ISATransferIn\ISATransferInOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ISATransfer\ISATransferIn\ISATransferInP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ISATransfer\ISATransferIn\ISATransferInP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ISATransfer\ISATransferOut\ISATransferOutClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ISATransfer\ISATransferOut\ISATransferOutOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ISATransfer\ISATransferOut\ISATransferOutP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ISATransfer\ISATransferOut\ISATransferOutP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CancelCustomerInLongTermCare\CancelCustomerInLongTermCareP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\CancelCustomerInLongTermCare\CancelCustomerInLongTermCareP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\ConfirmCustomerInLongTermCare\ConfirmCustomerInLongTermCareP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\ConfirmCustomerInLongTermCare\ConfirmCustomerInLongTermCareP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\ConfirmCustomerInLongTermCare\ConfirmCustomerInLongTermCareP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\UpdateConfirmCustomerInLongTermCare\UpdateConfirmCustomerInLongTermCareP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\LongTermCare\UpdateConfirmCustomerInLongTermCare\UpdateConfirmCustomerInLongTermCareP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\RespondToNote\RespondToNoteP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Notes\RespondToNote\RespondToNoteP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Roles\AddCeaseRole\AddCeaseRoleP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Roles\AddCeaseRole\AddCeaseRoleP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Roles\GenericAddCeaseRole\GenericAddCeaseRoleP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Roles\GenericAddCeaseRole\GenericAddCeaseRoleP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\OverrideCustomerTaxStatus\OverrideCustomerTaxStatusP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\OverrideCustomerTaxStatus\OverrideCustomerTaxStatusP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\OverrideCustomerTaxStatus\OverrideCustomerTaxStatusP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateOverrideCustomerTaxStatus\UpdateOverrideCustomerTaxStatusP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateOverrideCustomerTaxStatus\UpdateOverrideCustomerTaxStatusP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateTaxResidencyStatus\UpdateTaxResidencyStatusClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateTaxResidencyStatus\UpdateTaxResidencyStatusOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateTaxResidencyStatus\UpdateTaxResidencyStatusP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateTaxResidencyStatus\UpdateTaxResidencyStatusP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateTaxResidencyStatus\UpdateTaxResidencyStatusP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateTaxStatusUpdateRequest\UpdateTaxStatusUpdateRequestP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\TaxResidencyStatus\UpdateTaxStatusUpdateRequest\UpdateTaxStatusUpdateRequestP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\AddNewThirdParty\AddNewThirdPartyClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\AddNewThirdParty\AddNewThirdPartyOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\AddNewThirdParty\AddNewThirdPartyP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\AddNewThirdParty\AddNewThirdPartyP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\AddNewThirdParty\AddNewThirdPartyP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\AddNewThirdParty\AddNewThirdPartyP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\AddNewThirdParty\AddNewThirdPartyP5.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\AddNewThirdParty\AddNewThirdPartyP6.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\CeaseThirdParty\CeaseThirdPartyClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\CeaseThirdParty\CeaseThirdPartyOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\CeaseThirdParty\CeaseThirdPartyP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\CeaseThirdParty\CeaseThirdPartyP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\UpdateThirdParty\UpdateThirdPartyClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\UpdateThirdParty\UpdateThirdPartyOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\UpdateThirdParty\UpdateThirdPartyP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\UpdateThirdParty\UpdateThirdPartyP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\UpdateThirdParty\UpdateThirdPartyP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\UpdateThirdParty\UpdateThirdPartyP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\ThirdParty\UpdateThirdParty\UpdateThirdPartyP5.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\AdHocWithdrawal\AdHocWithdrawalClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\AdHocWithdrawal\AdHocWithdrawalOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\AdHocWithdrawal\AdHocWithdrawalP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\AdHocWithdrawal\AdHocWithdrawalP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\AdHocWithdrawal\AdHocWithdrawalP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\CancelWithdrawal\CancelWithdrawalP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\CancelWithdrawal\CancelWithdrawalP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\CancelWithdrawal\CancelWithdrawalClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\CreateWithdrawal\CreateWithdrawalP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\CreateWithdrawal\CreateWithdrawalP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\CreateWithdrawal\CreateWithdrawalP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\InternalTransfer\InternalTransferClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\InternalTransfer\InternalTransferP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\InternalTransfer\InternalTransferOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\InternalTransfer\InternalTransferP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\WithdrawalReversalWizard\WithdrawalReversalClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\WithdrawalReversalWizard\WithdrawalReversalOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\WithdrawalReversalWizard\WithdrawalReversalP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\WithdrawalReversalWizard\WithdrawalReversalP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Withdrawal\WithdrawalReversalWizard\WithdrawalReversalP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerPreferences\UpdateCustomerPreferencesClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerPreferences\UpdateCustomerPreferencesOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerPreferences\UpdateCustomerPreferencesP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerPreferences\UpdateCustomerPreferencesP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerPreferences\UpdateCustomerPreferencesP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerPreferences\UpdateCustomerPreferencesP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerPreferences\UpdateCustomerPreferencesP5.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Customer\UpdateCustomerPreferences\UpdateCustomerPreferencesP6.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\AdHocDeposit\AdHocDepositP4.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\ChequeDepositReversal\ChequeDepositReversalClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\ChequeDepositReversal\ChequeDepositReversalOpen.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\ChequeDepositReversal\ChequeDepositReversalP1.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\ChequeDepositReversal\ChequeDepositReversalP2.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Deposit\ChequeDepositReversal\ChequeDepositReversalP3.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\ConfirmCustomerDeceased\ConfirmCustomerDeceasedClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\CustomerDeceased\UpdateConfirmCustomerDeceased\UpdateConfirmCustomerDeceasedClose.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\CreditStub.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP01.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP02.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP03.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP04.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP05.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP05FourthSig.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP05SecondSig.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP05ThirdSig.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP06.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP07SecondShareholder.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP07ThirdShareholder.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP07FourthShareholder.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP09.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP12.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP15.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP17.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\DecisionPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP19.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP19Card.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP25.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\EAP27.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\ConfirmPaymentDetails.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\EBankingLoginPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\EnterPaymentDetailsPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\LoginDetailsConfirmationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\MemorableAnswerPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\ProductSelection.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\SavingsPortal\SaveAndRestore.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\NewUserIDPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\eBankingPortal\PaymentConfirmationPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\AccountSearchCriteriaPage.cs" />
+    <Compile Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\AuthenticateCustomerPage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="TestInfo.runsettings" />
+    <None Include="TestFiles\docx.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\pdf.pdf" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dpr.AutomationFramework.Clients\CBS\AvailableJourneys\MortgageProductTypes\" />
+    <Folder Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Bonus\RedeemBonus\" />
+    <Folder Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Company\AddCompany\" />
+    <Folder Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\Company\UpdateCompanyDetails\" />
+    <Folder Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\History\PropertyHistory\" />
+    <Folder Include="Dpr.AutomationFramework.PageRepository\ServicingApplication\Wizards\History\VersionHistory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestFiles\gif.GIF" />
+    <None Include="TestFiles\jpg.JPG" />
+    <None Include="TestFiles\png.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dashboard.html" />
+    <Content Include="index.html" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.props'))" />
+    <Error Condition="!Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.MsTest.3.0.224\build\SpecFlow.MsTest.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.MsTest.3.0.224\build\SpecFlow.MsTest.props'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.MsTest.3.0.224\build\SpecFlow.MsTest.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.MsTest.3.0.224\build\SpecFlow.MsTest.targets'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.224\build\SpecFlow.Tools.MsBuild.Generation.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.224\build\SpecFlow.Tools.MsBuild.Generation.props'))" />
+    <Error Condition="!Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.224\build\SpecFlow.Tools.MsBuild.Generation.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.224\build\SpecFlow.Tools.MsBuild.Generation.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.92.0.4515.4300\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.92.0.4515.4300\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.4.0\build\net45\MSTest.TestAdapter.targets')" />
+  <Import Project="..\packages\SpecFlow.MsTest.3.0.224\build\SpecFlow.MsTest.targets" Condition="Exists('..\packages\SpecFlow.MsTest.3.0.224\build\SpecFlow.MsTest.targets')" />
+  <Import Project="..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.224\build\SpecFlow.Tools.MsBuild.Generation.targets" Condition="Exists('..\packages\SpecFlow.Tools.MsBuild.Generation.3.0.224\build\SpecFlow.Tools.MsBuild.Generation.targets')" />
+  <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.92.0.4515.4300\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.92.0.4515.4300\build\Selenium.WebDriver.ChromeDriver.targets')" />
+</Project>

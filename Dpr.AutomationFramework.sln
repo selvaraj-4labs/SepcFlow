@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dpr.AutomationFramework", "Dpr.AutomationFramework\Dpr.AutomationFramework.csproj", "{4E634D7D-974A-4F9D-A030-B3E0E8F63B32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F14974EB-8847-424D-A22C-ACFB046BF447}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
+		Cleanse.proj = Cleanse.proj
+		GenerateNugetPackageName.ps1 = GenerateNugetPackageName.ps1
+		GitVersion.yml = GitVersion.yml
+		LocalBuild.cmd = LocalBuild.cmd
+		LocalBuild.proj = LocalBuild.proj
+		nuget.config = nuget.config
+		project.nuspec = project.nuspec
+		projects.yml = projects.yml
+		README.md = README.md
+		RootBuilder.proj = RootBuilder.proj
+		WrapUp.proj = WrapUp.proj
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E634D7D-974A-4F9D-A030-B3E0E8F63B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E634D7D-974A-4F9D-A030-B3E0E8F63B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E634D7D-974A-4F9D-A030-B3E0E8F63B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E634D7D-974A-4F9D-A030-B3E0E8F63B32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49D34DAA-2DC2-4F07-8CDA-EC33E614EFDD}
+	EndGlobalSection
+EndGlobal

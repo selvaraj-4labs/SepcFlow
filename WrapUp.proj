@@ -1,0 +1,30 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="WrapUp">
+  <!--
+This is the WrapUp MSBUild file. 
+
+The purpose of this file is to create your distributable components, such as Self-Extracting 
+Setup files and/or distributable component assemblies. Do not expose more than people will need to
+use. 
+
+You CAN modify this file to add more CreateApplicationSetupTask lines or similar. Do not change the overall
+structure or intended purpose though.
+
+If your application setup generation fails, you can run this file locally to see what's wrong. 
+But you should never distribute locally created setup file. (Except for ciritical updates)
+-->
+
+  <ItemGroup>
+    <OutputFiles Include="$(MSBuildProjectDirectory)\Dpr.AutomationFramework\bin\Release\Dpr.AutomationFramework.dll"/>
+    <OutputFiles Include="$(MSBuildProjectDirectory)\Dpr.AutomationFramework\bin\Release\Dpr.AutomationFramework.dll.config"/>
+    <OutputFiles Include="$(MSBuildProjectDirectory)\Dpr.AutomationFramework\bin\Release\Dpr.AutomationFramework.pdb"/>
+  </ItemGroup>
+
+
+  <Target Name="WrapUp">
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\Targets\Assemblies" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\Targets" />
+    <MakeDir Directories="$(MSBuildProjectDirectory)\Targets\Assemblies" />
+
+    <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(MSBuildProjectDirectory)\Targets\Assemblies" />
+  </Target>
+</Project>

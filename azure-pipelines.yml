@@ -1,0 +1,103 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+- feature/*
+- release/*
+- hotfix/*
+- support/*
+
+pool:
+  name: 'Platform'
+
+jobs:
+- job: Build # name of the job, A-Z, a-z, 0-9, and underscore
+  displayName: 'Build automation framework'
+  workspace:
+    clean: all # what to clean up before the job runs
+  steps:
+  - checkout: self
+    persistCredentials: true
+
+  - task: GitVersion@5
+    inputs:
+      runtime: 'full'
+      configFilePath: 'GitVersion.yml'
+      additionalArguments: /output buildserver
+
+  # Generates an environment variable (NugetPackageName) that we use as the nuget package name
+  - powershell: .\GenerateNugetPackageName.ps1
+
+  - script: |
+     set
+    displayName: 'Dump the environment variables'
+
+  # Make sure we have the required version on nuget installed
+  - task: NuGetToolInstaller@1
+    displayName: 'Ensure nuget version 5.3.1'
+    inputs:
+      versionSpec: '5.3.1'
+
+  - task: NuGetCommand@2
+    displayName: 'NuGet restore'
+    inputs:
+      vstsFeed: 'b90c6aeb-71e1-4484-9378-cfd3f8dd24bc'
+
+  - task: MSBuild@1
+    displayName: 'Build solution RootBuilder.proj'
+    env:
+      UNIVERSAL_DOWNLOAD_PAT: $(System.AccessToken)
+    inputs:
+      solution: RootBuilder.proj
+      msbuildVersion: "15.0"
+      platform: 'Any CPU'
+      configuration: Release
+      msbuildArchitecture: 'x64'
+  
+  - task: VSTest@2
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*.Tests.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+      codeCoverageEnabled: false
+      testFiltercriteria: TestCategory!=Manual
+
+  - task: SpecFlowPlus@0
+    inputs:
+      generatorSource: 'FeatureFolder'
+      projectFilePath: 'Dpr.AutomationFramework'
+      projectLanguage: 'en'
+
+  - task: NuGetCommand@2
+    displayName: 'Create nuget package'
+    condition: succeeded()
+    inputs:
+      command: pack
+      packagesToPack: project.nuspec
+      versioningScheme: byEnvVar
+      versionEnvVar: NugetPackageName
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.Repository.LocalPath)\Dpr.AutomationFramework\TestInfo.runsettings'
+      artifact: 'runsettings'
+  
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.Repository.LocalPath)\Dpr.AutomationFramework\bin\Release'
+      artifact: 'drop-tests'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish build artifact'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
+
+

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  
+  <RunConfiguration>
+    <TargetPlatform>x86</TargetPlatform>
+    <TargetFrameworkVersion>Framework45</TargetFrameworkVersion>
+    <TreatTestAdapterErrorsAsWarnings>true</TreatTestAdapterErrorsAsWarnings>
+    <CollectSourceInformation>true</CollectSourceInformation>
+    <MaxCpuCount>0</MaxCpuCount>
+    <DisableParallelization>false</DisableParallelization>
+    <TestSessionTimeout>1000000</TestSessionTimeout>
+  </RunConfiguration>
+  
+  
+  <TestRunParameters>
+    
+    <!-- Savings Portal Specific -->
+    <Parameter name="savingsProductSelectionPageUrl" value="https://o58422.dprdev.net/Savings/" />
+    <Parameter name="eBankingLoginPageUrl" value="https://s58422.dprdev.net/ebanking" />
+
+    <!-- Mortgage Portal Specific -->
+    <Parameter name="brokerUrl" value="https://cbsvdevapp007.dprdev.net/Intermediary" />
+    <Parameter name="branchUrl" value="https://cbsvdevapp007.dprdev.net/branch" />
+    
+    <!-- Satellite Machine Locators --> 
+    <Parameter name="WindowsApplicationDriverUrlOriginations1" value="http://127.0.0.1:4723/wd/hub" /> 
+    <Parameter name="WindowsApplicationDriverUrlServicing1" value="http://127.0.0.1:4723/wd/hub" />
+    <Parameter name="WindowsApplicationDriverUrlOriginations2" value="http://bammtestapp002.dpr.co.uk:4723/wd/hub" />
+    <Parameter name="WindowsApplicationDriverUrlServicing2" value="http://bammtestapp002.dpr.co.uk:4724/wd/hub" />
+    
+    <!-- Application Locators -->
+    <!--<Parameter name="backOfficeFilePath" value="C:\Program Files\DPR\PBRTEC_TEST_O\DPRBackOffice\Dpr.BackOffice.Executable.exe" />-->
+    <!--changed for test agent win10-01-->
+    <Parameter name="backOfficeFilePath" value="C:\Program Files\DPR\AZURE_DEV_O\DPRBackOffice\Dpr.BackOffice.Executable.exe" />
+    <Parameter name="backOfficeWindowLocator" value="/Pane[@ClassName=&quot;#32769&quot;][@Name=&quot;Desktop&quot;]/Window[@Name=&quot;Back Office&quot;][@AutomationId=&quot;MdiHost&quot;]" />
+    
+    <Parameter name="servicingFilePath" value="C:\Program Files\DPR\AZURE_DEV_S\DprServicing\Dpr.Lss.Admin.UI.exe" />
+    <Parameter name="servicingWindowLocator" value="/Pane[@ClassName=&quot;#32769&quot;][@Name=&quot;Desktop 1&quot;]/Window[starts-with(@Name,&quot;Account Servicing&quot;)][@AutomationId=&quot;MdiHost&quot;]" />
+
+    <!-- Timeout Definitions -->
+    <Parameter name="webImplicitTimeoutInSeconds" value="45" />
+    <Parameter name="appImplicitTimeoutInSeconds" value="90" />
+    
+    <!-- MailTrap Acces Details -->
+    <Parameter name="mailTrapInboxId" value="727951" />
+    <Parameter name="apiToken" value="b8f3a463d9d2ed1cf5e1392910e44934" />
+   
+    <Parameter name="automationScreenshotFolder" value="C:\agent-work\_temp\TestResults" />
+
+  </TestRunParameters>
+  
+  <!-- MSTest adapter -->
+  <MSTest>
+    <MapInconclusiveToFailed>True</MapInconclusiveToFailed>
+    <CaptureTraceOutput>false</CaptureTraceOutput>
+    <DeleteDeploymentDirectoryAfterTestRunIsComplete>False</DeleteDeploymentDirectoryAfterTestRunIsComplete>
+    <DeploymentEnabled>False</DeploymentEnabled>
+    <AssemblyResolution>
+      <Directory Path="D:\myfolder\bin\" includeSubDirectories="false"/>
+    </AssemblyResolution>
+  </MSTest>
+</RunSettings>
